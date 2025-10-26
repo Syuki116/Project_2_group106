@@ -1,0 +1,21 @@
+# Ignore build output folders
+build/
+cmake-build-*/
+
+# Ignore IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Ignore compiled files
+*.o
+*.exe
+*.out
+*.a
+*.so
+*.dylib
+
+# Optional: ignore big datasets
+data/*.csv
+!data/.keep
