@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <sstream>
 #include "trip.h"
 #include "load_csv.h"
 #include "grid_index.h"
@@ -27,29 +28,68 @@ int main() {
     std::vector<Trip> trips;
     // NYC-ish bounds and a reasonable grid cell size (degrees)
     GridIndex grid(40.3, 41.0, -74.3, -73.6, 0.01);
-    KDTree kd;
+    std::string path = "data/yellow_tripdata_2015-01.csv";
+    size_t limit = 100000;
+    trips = load_trips_csv(path, limit);
+    grid.build(trips);
+    KDTree kd(trips);
+    std::cout<<"trips.size()="<<trips.size()<<endl;
 
     while (true) {
         printMenu();  // show the menu
         int choice;
         std::cin >> choice; // get user input
-
         // if input fails (e.g. user enters non-number), end program
         if (!std::cin) {
             return 0;
         }
 
         if (choice == 1) {
-            // std::string path = "data/yellow_tripdata_2015-01.csv";
-            // size_t limit = 100000;
-            // trips = load_trips_csv(path, limit);
+            double minlat, maxlat, minlon, maxlon;
+            std::cout << "Enter minLat, maxLat, minLon, and maxLon (separated by spaces): ";
+            std::cin >> minlat >> maxlat >> minlon >> maxlon;
+            if (std::cin.fail()) {
+                std::cout << "Invalid input! Please enter four numeric values."<< std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
+            }
+            GridRect BoxGrid(minlat, maxlat, minlon, maxlon);
+            Rect Box(minlat, maxlat, minlon, maxlon);
+            vector<const Trip*> out;
+            grid.rangeQuery(BoxGrid, out);
+            std::cout<<"Grid Index Result: "<<out.size()<<endl;
+            kd.rangeQuery(Box, out);
+            std::cout<<"KD-Tree Result: "<<out.size()<<endl;
         }
-        else if (choice == 2) {
-            // auto start = std::chrono::high_resolution_clock::now();
-            // grid.build(trips);
-            // auto end = std::chrono::high_resolution_clock::now();
-            // std::chrono::duration<double> elapsed = end - start;
-            // std::cout << "Grid Index built in " << elapsed.count() << " seconds.\n";
+        else if (choice == 2)  {
+            vector<const Trip*> gridOut;
+            vector<const Trip*> treeOut;
+            double minLat, maxLat, minLon, maxLon;
+            std::cout << "Enter minLat maxLat minLon maxLon: ";
+            std::cin >> minLat >> maxLat >> minLon >> maxLon;
+            if (std::cin.fail()) {
+                std::cout << "Invalid input! Please enter four numeric values."<< std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
+            }
+            GridRect gridBox(minLat, maxLat, minLon, maxLon);
+            Rect treeBox(minLat, maxLat, minLon, maxLon);
+            auto gridStart = std::chrono::high_resolution_clock::now();
+            grid.rangeQuery(gridBox, gridOut);
+            auto gridEnd = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> gridElapsed = gridEnd - gridStart;
+            std::cout << "Grid Index built in " << gridElapsed.count() << " seconds.\n";
+
+            auto treeStart = std::chrono::high_resolution_clock::now();
+            kd.rangeQuery(treeBox, treeOut);
+            auto treeEnd = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> treeElapsed = treeEnd - treeStart;
+            std::cout << "KD-Tree built in " << treeElapsed.count() << " seconds.\n";
+
+            if (treeElapsed.count() < gridElapsed.count()) std::cout << "KD-Tree approach is faster.\n";
+            else std::cout << "Grid index approach is faster.\n";
         }
         else if (choice == 3) {
             break;
