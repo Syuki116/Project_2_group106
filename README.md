@@ -1,6 +1,5 @@
 # NYC Taxi Analyzer (Course Project)
-This project compares two spatial indexing methods—**Grid Index** and **KD-Tree**—for speeding up geographic range queries on the **2015 NYC Yellow Taxi** dataset. The program loads a large CSV of trips, builds an index, and lets you run bounding-box searches (minLat, maxLat, minLon, maxLon). It also reports **build time**, **query latency**, and optionally memory usage so you can evaluate trade-offs between the two approaches.
-
+This project compares two spatial indexing methods—**Grid Index** and **KD-Tree**—for speeding up geographic range queries on the **2015 NYC Yellow Taxi** dataset. The program loads a large CSV of trips, builds an index, and lets you run bounding-box searches (minLat, maxLat, minLon, maxLon).
 ## Installation
 **Prerequisites**
 - C++17 compiler (clang or g++)
