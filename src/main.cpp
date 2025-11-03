@@ -16,7 +16,7 @@ static void printMenu() {
     //              "5. Compare performance (Grid vs KD-Tree)\n"
     //              "6. Exit\n"
     //              "Enter your choice: ";
-    cout<< "Welcome to find my Taxi\n"
+    std::cout<< "Welcome to find my Taxi\n"
     "1. Search the number of trips by area (latitude/longitude range) using Grid Index and KD-Tree\n"
     "2. Compare performance (Grid vs KD-Tree)\n"
     "3. Exit\n";
@@ -40,25 +40,18 @@ int main() {
         }
 
         if (choice == 1) {
-            std::string path = "data/yellow_tripdata_2015-01.csv";
-            size_t limit = 100000;
-            trips = load_trips_csv(path, limit);
+            // std::string path = "data/yellow_tripdata_2015-01.csv";
+            // size_t limit = 100000;
+            // trips = load_trips_csv(path, limit);
         }
         else if (choice == 2) {
-            auto start = std::chrono::high_resolution_clock::now();
-            grid.build(trips);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> elapsed = end - start;
-            std::cout << "Grid Index built in " << elapsed.count() << " seconds.\n";
+            // auto start = std::chrono::high_resolution_clock::now();
+            // grid.build(trips);
+            // auto end = std::chrono::high_resolution_clock::now();
+            // std::chrono::duration<double> elapsed = end - start;
+            // std::cout << "Grid Index built in " << elapsed.count() << " seconds.\n";
         }
         else if (choice == 3) {
-
-        }
-        else if (choice == 4) {
-        }
-        else if (choice == 5) {
-        }
-        else if (choice == 6) {
             break;
         }
         else {
