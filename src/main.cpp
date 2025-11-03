@@ -38,9 +38,14 @@ int main() {
         if (choice == 1) {
             std::string path = "data/yellow_tripdata_2015-01.csv";
             size_t limit = 100000;
+            trips = load_trips_csv(path, limit);
         }
         else if (choice == 2) {
-
+            auto start = std::chrono::high_resolution_clock::now();
+            grid.build(trips);
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double> elapsed = end - start;
+            std::cout << "Grid Index built in " << elapsed.count() << " seconds.\n";
         }
         else if (choice == 3) {
 
