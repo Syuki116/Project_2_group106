@@ -7,6 +7,10 @@
 #include "grid_index.h"
 #include "kd_tree.h"
 
+#include <filesystem>
+namespace fs = std::filesystem;
+
+
 
 static void printMenu() {
     // std::cout << "Welcome to find my Taxi\n"
@@ -28,9 +32,24 @@ int main() {
     std::vector<Trip> trips;
     // NYC-ish bounds and a reasonable grid cell size (degrees)
     GridIndex grid(40.3, 41.0, -74.3, -73.6, 0.01);
-    std::string path = "data/yellow_tripdata_2015-01.csv";
+    std::string path_found;
+    for (const std::string& cand : {
+            std::string("../data/yellow_tripdata_2015-01.csv"),
+            std::string("data/yellow_tripdata_2015-01.csv"),
+            std::string("../../data/yellow_tripdata_2015-01.csv")
+        }) {
+        if (fs::exists(cand)) { path_found = cand; break; }
+        }
+
+
     size_t limit = 100000;
-    trips = load_trips_csv(path, limit);
+    //trips = load_trips_csv(path, limit);
+    trips = load_trips_csv(path_found, limit);
+    std::cout << "trips.size() = " << trips.size() << "\n";
+    if (trips.empty()) {
+        std::cerr << "ERROR: Loaded 0 trips. (Either columns weren’t found or file had no valid rows.)\n";
+        return 1;
+    }
     grid.build(trips);
     KDTree kd(trips);
     std::cout<<"trips.size()="<<trips.size()<<endl;

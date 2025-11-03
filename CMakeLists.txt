@@ -1,22 +1,12 @@
-#cmake_minimum_required(VERSION 3.29)
-#project(Project_2_group106)
-#
-#set(CMAKE_CXX_STANDARD 20)
-#
-#add_executable(Project_2_group106 src/main.cpp
-#        src/load_csv.cpp
-#        src/kd_tree.h
-#        src/kd_tree.cpp
-#        src/grid_index.h
-#        src/grid_index.cpp
-#        src/load_csv.h)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 cmake_minimum_required(VERSION 3.29)
 project(Project_2_group106)
 
 # Course toolchain
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+#set(CMAKE_CXX_STANDARD 14)
+#set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Warnings
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Werror")
