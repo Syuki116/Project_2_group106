@@ -10,7 +10,6 @@ This project compares two spatial indexing methods—**Grid Index** and **KD-Tre
 
 ## Data
 1. By default, we have 2015 NYC Yellow Taxi CSV trip records from kaggle.
-2. You can insert any CSV data with similar columns into 'data' folder or press 1 in menu. 
 
 ## Usage
 ### Run the program
@@ -23,10 +22,11 @@ When prompted for the dataset path, enter:
 data/nyc_taxi.csv
 
 ### Typical Workflow
-1. Load dataset → enter data/nyc_taxi.csv
-2. Build index → choose Grid or KD-Tree
-3. Search → input bounding box (minLat maxLat minLon maxLon)
-4. (Optional) Compare performance
+1. Load dataset in the back.
+2. Build index for Grid and KD-Tree
+3. Search → input bounding box (minLat maxLat minLon maxLon) and print out if user enters choice 1.
+4. Compare performance of Grid and KD-Tree if user enters choice 2.
+5. Exit the program if user enters choice 3.
 
 
 ## Contributors to this project
