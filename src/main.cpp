@@ -34,7 +34,10 @@ int main() {
     grid.build(trips);
     KDTree kd(trips);
     std::cout<<"trips.size()="<<trips.size()<<endl;
-
+    // if (trips.size()==0) {
+    //     std::cout<<"Please download it according to README.md and place it under the 'data' folder.\n"<<endl;
+    //     return 0;
+    // }
     while (true) {
         printMenu();  // show the menu
         int choice;
@@ -98,4 +101,5 @@ int main() {
             std::cout << "Invalid choice.\n\n";
         }
     }
+    return 0;
 }
