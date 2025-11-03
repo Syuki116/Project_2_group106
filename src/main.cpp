@@ -8,14 +8,18 @@
 
 
 static void printMenu() {
-    std::cout << "Welcome to find my Taxi\n"
-                 "1. Load taxi dataset\n"
-                 "2. Build Grid Index\n"
-                 "3. Build KD-Tree\n"
-                 "4. Search trips by area (latitude/longitude range)\n"
-                 "5. Compare performance (Grid vs KD-Tree)\n"
-                 "6. Exit\n"
-                 "Enter your choice: ";
+    // std::cout << "Welcome to find my Taxi\n"
+    //              "1. Load taxi dataset\n"
+    //              "2. Build Grid Index\n"
+    //              "3. Build KD-Tree\n"
+    //              "4. Search trips by area (latitude/longitude range)\n"
+    //              "5. Compare performance (Grid vs KD-Tree)\n"
+    //              "6. Exit\n"
+    //              "Enter your choice: ";
+    cout<< "Welcome to find my Taxi\n"
+    "1. Search the number of trips by area (latitude/longitude range) using Grid Index and KD-Tree\n"
+    "2. Compare performance (Grid vs KD-Tree)\n"
+    "3. Exit\n";
 }
 
 
